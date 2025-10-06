@@ -77,15 +77,15 @@ export default function Dashboard() {
       return;
     }
 
-    const { data, error} = await supabase
-    .from("profiles")
-    .select("display_name")
-    .eq("id", user.id)
-    .single();
+    const { data, error } = await supabase
+      .from("profiles")
+      .select("display_name")
+      .eq("id", user.id)
+      .single();
     if (error) {
       console.error("Error fetching profile:", error);
     } else {
-     setDisplayName(data.display_name);
+      setDisplayName(data.display_name);
     }
   }
 
