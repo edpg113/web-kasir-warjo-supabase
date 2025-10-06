@@ -29,7 +29,9 @@ h4 {
 .main-content h1 {
   margin-bottom: 50px;
 }
-
+/* .main-content h2 {
+  margin-bottom: 50px;
+} */
 .info-cards {
   display: flex;
   gap: 20px;

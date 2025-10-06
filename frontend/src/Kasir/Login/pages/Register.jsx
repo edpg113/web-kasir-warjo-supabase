@@ -8,17 +8,21 @@ import { supabase } from "../../../supabase/supabaseClient";
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [displayName, setDisplayName] = useState("");
 
   const navigate = useNavigate();
 
   async function handleRegister(e) {
     e.preventDefault();
 
+    const initial = displayName && displayName.trim() !== "" ? displayName : email;
+
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
       options: {
         emailRedirectTo: "http://localhost:5173/",
+        data: {display_name: initial},
       },
     });
     if (error) {
@@ -69,6 +73,12 @@ export default function Register() {
         </div>
         <form onSubmit={handleRegister}>
           <h1>Register</h1>
+           <input
+            type="text"
+            placeholder="nama pengguna"
+            value={displayName}
+            onChange={(e) => setDisplayName(e.target.value)}
+          />
           <input
             type="email"
             placeholder="email"

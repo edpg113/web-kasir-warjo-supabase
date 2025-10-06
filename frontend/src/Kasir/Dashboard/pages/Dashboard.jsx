@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
   const [session, setSession] = useState(null);
+  const [displayName, setDisplayName] = useState("");
   const navigate = useNavigate();
   const [stats, setStats] = useState({
     totalPenjualanHariIni: 0,
@@ -63,13 +64,36 @@ export default function Dashboard() {
       }
     };
     fetchStats();
+    getProfiles();
   }, []);
+
+  async function getProfiles() {
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser();
+    if (userError || !user) {
+      console.error("Error fetching user:", userError);
+      return;
+    }
+
+    const { data, error} = await supabase
+    .from("profiles")
+    .select("display_name")
+    .eq("id", user.id)
+    .single();
+    if (error) {
+      console.error("Error fetching profile:", error);
+    } else {
+     setDisplayName(data.display_name);
+    }
+  }
 
   return (
     <div className="dashboard-page">
       <Sidebar />
       <div className="main-content">
-        <h1>Dashboard</h1>
+        <h1>Dashboard, 👋 {displayName ? displayName : "loading..."}</h1>
         <div className="info-cards">
           <div className="card">
             <h4>Total Penjualan Hari Ini</h4>
