@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import Sidebar from "../../components/Sidebar";
 import "../style/laporan.css";
 import moment from "moment-timezone";
 import Swal from "sweetalert2";
 import { supabase } from "../../../supabase/supabaseClient";
 import * as XLSX from "xlsx";
-import { saveAs } from "file-saver";
 
 export default function Laporan() {
   const [tanggal, setTanggal] = useState(() => {
