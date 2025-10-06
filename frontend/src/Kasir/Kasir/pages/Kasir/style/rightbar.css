@@ -1,0 +1,312 @@
+.rightbar {
+  width: 300px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  right: 0;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  height: 100vh;
+  z-index: 1;
+}
+
+.receipt {
+  h2 {
+    padding-bottom: 20px;
+    display: flex;
+    img {
+      max-width: 30px;
+      padding-right: 10px;
+    }
+  }
+}
+
+.cart-items {
+  /* list-style:; */
+  padding: 0;
+  max-height: 500px;
+  overflow-y: auto;
+  text-align: left;
+
+  .row {
+    span {
+      font-weight: 500px;
+      list-style: circle;
+    }
+    button {
+      background: none;
+      border: none;
+      color: red;
+      cursor: pointer;
+      font-size: 16px;
+      margin-left: 10px;
+      &:hover {
+        color: darken(red, 10%);
+      }
+    }
+  }
+  .catatan {
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 5px;
+    margin-left: 20px;
+  }
+}
+
+.cart-items li {
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.cart-items li:last-child {
+  border-bottom: none;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.checkout-button {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  margin-top: 10px;
+  width: 100%;
+
+  &:hover {
+    background-color: darken(rgb(0, 170, 19), 10%);
+  }
+}
+
+.checkout-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(3px);
+
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 500px;
+    text-align: left;
+
+    ul {
+      display: flex;
+      list-style: none;
+      padding: 10px;
+      gap: 10px;
+
+      li {
+        border: 1px solid #ddd;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100%;
+        color: white;
+
+        &:nth-child(1) {
+          background-color: #1191c8;
+        }
+
+        &:nth-child(2) {
+          background-color: #d59a06;
+        }
+
+        &:nth-child(3) {
+          background-color: #28a745;
+        }
+      }
+    }
+
+    h3 {
+      margin-top: 0;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .modal-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+
+      button {
+        padding: 10px 15px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+
+        &:first-child {
+          background-color: #3b3d3d;
+          color: white;
+        }
+
+        &:last-child {
+          background-color: rgb(0, 170, 19);
+          color: white;
+        }
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+}
+
+.payment-details-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1001;
+  backdrop-filter: blur(3px);
+}
+
+.payment-details-modal .modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.payment-details-modal .modal-content .head {
+  margin-bottom: 20px;
+}
+
+.payment-details-modal .modal-content .head .icon {
+  img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.payment-details-modal .modal-content h2 {
+  color: #28a745;
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.payment-details-modal .modal-content .list-items {
+  margin-bottom: 20px;
+}
+
+.payment-details-modal .modal-content .list-items ul {
+  list-style: none;
+  padding: 0;
+}
+
+.payment-details-modal .modal-content .list-items ul li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-size: 1em;
+}
+
+.payment-details-modal .modal-content .list-items ul li:last-child {
+  border-bottom: none;
+}
+
+.payment-details-modal .modal-content .list-items ul li span {
+  font-weight: 450;
+}
+.payment-details-modal .modal-content .list-items ul li span:last-child {
+  color: #28a745;
+}
+
+.payment-details-modal .modal-content .modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.payment-details-modal .modal-content .modal-buttons button {
+  padding: 10px;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  align-items: center;
+  width: 180px;
+}
+
+.payment-details-modal .modal-content .modal-buttons button.cetak {
+  background-color: #28a745;
+}
+
+.payment-details-modal .modal-content .modal-buttons button.selesai {
+  background-color: #3b3d3d;
+}
+
+.payment-details-modal .modal-content .countdown {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #777;
+}
+
+/* ...existing styles... */
+
+@media print {
+  /* Sembunyikan semua elemen kecuali struk */
+  body * {
+    visibility: hidden;
+  }
+
+  .struk-container,
+  .struk-container * {
+    visibility: visible;
+  }
+
+  .struk-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: block !important; /* Override display: none */
+  }
+
+  /* Atur style untuk struk agar sesuai dengan tampilan cetak */
+  .struk {
+    font-size: 12px;
+  }
+}

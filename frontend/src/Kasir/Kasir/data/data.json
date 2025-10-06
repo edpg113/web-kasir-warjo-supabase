@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "gambar": "/assets/americano.webp",
+    "produk": "Americano",
+    "kategori": "kopi",
+    "metode": "",
+    "gula": "",
+    "harga": 25000,
+    "qty": 1
+  },
+  {
+    "id": 2,
+    "gambar": "/assets/pizza.jpg",
+    "produk": "Pizza",
+    "kategori": "cemilan",
+    "metode": "",
+    "gula": "",
+    "harga": 25000,
+    "qty": 1
+  },
+  {
+    "id": 3,
+    "gambar": "/assets/jus.jpg",
+    "produk": "Jus Jeruk",
+    "kategori": "non-kopi",
+    "metode": "",
+    "gula": "",
+    "harga": 20000,
+    "qty": 1
+  },
+  {
+    "id": 4,
+    "gambar": "/assets/rice.jpg",
+    "produk": "Nasi Goreng",
+    "kategori": "makanan",
+    "metode": "",
+    "gula": "",
+    "harga": 25000,
+    "qty": 1
+  },
+  {
+    "id": 5,
+    "gambar": "/assets/susuKocokOreo.webp",
+    "produk": "Cookies and Cream",
+    "kategori": "non-kopi",
+    "metode": "",
+    "gula": "",
+    "harga": 25000,
+    "qty": 1
+  },
+  {
+    "id": 6,
+    "gambar": "/assets/cappuccino.webp",
+    "produk": "Cappuccino",
+    "kategori": "kopi",
+    "metode": "",
+    "gula": "",
+    "harga": 27000,
+    "qty": 1
+  },
+  {
+    "id": 7,
+    "gambar": "/assets/coklatBlubery.jpg",
+    "produk": "Coklat Blubery",
+    "kategori": "cemilan",
+    "metode": "",
+    "gula": "",
+    "harga": 20000,
+    "qty": 1
+  },
+  {
+    "id": 8,
+    "gambar": "/assets/mieAceh.jpeg",
+    "produk": "Mie Aceh",
+    "kategori": "makanan",
+    "metode": "",
+    "gula": "",
+    "harga": 15000,
+    "qty": 1
+  },
+  {
+    "id": 9,
+    "gambar": "/assets/dimsumMentai.jpeg",
+    "produk": "DimSum Mentai",
+    "kategori": "cemilan",
+    "metode": "",
+    "gula": "",
+    "harga": 15000,
+    "qty": 1
+  },
+  {
+    "id": 10,
+    "gambar": "/assets/rotiBakar.webp",
+    "produk": "Roti Bakar",
+    "kategori": "cemilan",
+    "metode": "",
+    "gula": "",
+    "harga": 10000,
+    "qty": 1
+  },
+  {
+    "id": 11,
+    "gambar": "/assets/seblak.jpg",
+    "produk": "Seblak",
+    "kategori": "cemilan",
+    "metode": "",
+    "gula": "",
+    "harga": 10000,
+    "qty": 1
+  },
+  {
+    "id": 12,
+    "gambar": "/assets/matcha.jpg",
+    "produk": "Matcha Latte",
+    "kategori": "non-kopi",
+    "metode": "",
+    "gula": "",
+    "harga": 20000,
+    "qty": 1
+  },
+   {
+    "id": 13,
+    "gambar": "/assets/macncheese.webp",
+    "produk": "Mac n Cheese",
+    "kategori": "cemilan",
+    "metode": "",
+    "gula": "",
+    "harga": 35000,
+    "qty": 1
+  },
+   {
+    "id": 14,
+    "gambar": "/assets/risolmayo.jpeg",
+    "produk": "Risol Mayo",
+    "kategori": "cemilan",
+    "metode": "",
+    "gula": "",
+    "harga": 15000,
+    "qty": 1
+  },
+   {
+    "id": 15,
+    "gambar": "/assets/spagetti.webp",
+    "produk": "Spagetti",
+    "kategori": "makanan",
+    "metode": "",
+    "gula": "",
+    "harga": 30000,
+    "qty": 1
+  }
+]

@@ -1,0 +1,98 @@
+.laporan-container {
+  padding: 50px;
+  margin-left: 350px;
+}
+
+.filter-tanggal {
+  margin: 3% 0;
+  input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+    margin-right: 10px;
+  }
+  button {
+    background: rgb(19, 209, 136);
+    width: 120px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    box-shadow: 0px 3px 20px rgba(112, 111, 111, 0.322);
+    cursor: pointer;
+    margin: 0 auto;
+  }
+}
+
+.transaksi-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.transaksi-box {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 15px;
+  width: 220px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.transaksi-box:hover {
+  background: #f9f9f9;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(2px);
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 600px;
+  max-width: 95%;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    th,
+    td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background: rgb(19, 209, 136);
+      color: white;
+    }
+  }
+}
+
+@media screen and (min-width: 820px) and (max-width: 1550px) {
+  .laporan-container {
+    margin-left: 280px;
+    padding: 40px;
+    z-index: 12;
+  }
+
+  /* .modal-content {
+    width: 90%;
+  } */
+}
