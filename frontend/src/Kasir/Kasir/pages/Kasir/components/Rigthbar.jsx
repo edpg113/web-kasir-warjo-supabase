@@ -266,13 +266,13 @@ export default function Rigthbar({
                   <li>
                     Total Bayar{" "}
                     <span>
-                      Rp {transaksiDetails.total.toLocaleString("id-ID")}
+                      Rp. {transaksiDetails.total.toLocaleString("id-ID")}
                     </span>
                   </li>
                   <li>
                     Kembalian{" "}
                     <span>
-                      Rp {transaksiDetails.kembalian.toLocaleString("id-ID")}
+                      Rp. {transaksiDetails.kembalian.toLocaleString("id-ID")}
                     </span>
                   </li>
                 </ul>

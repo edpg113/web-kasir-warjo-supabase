@@ -113,6 +113,7 @@ export default function Mainbar({
         <div className="boxModal">
           <form onSubmit={handleModalSubmit}>
             <h3>Tambahkan Catatan</h3>
+            <h3>{modalItem.namaProduk}</h3>
             <div>
               <label>Qty : </label>
               <input

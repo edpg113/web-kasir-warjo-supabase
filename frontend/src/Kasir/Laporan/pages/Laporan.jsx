@@ -15,6 +15,7 @@ export default function Laporan() {
   const [transaksi, setTransaksi] = useState([]);
   const [selectedTransaksi, setSelectedTransaksi] = useState(null);
   const [detail, setDetail] = useState([]);
+  const [filterId, setFilterId] = useState("");
 
   useEffect(() => {
     fetchTransaksi();
@@ -155,6 +156,10 @@ export default function Laporan() {
     }
   };
 
+  const filteredTransaksi = filterId
+    ? transaksi.filter((trx) => trx.transaksi_id.includes(filterId))
+    : transaksi;
+
   return (
     <div>
       <Sidebar />
@@ -168,11 +173,20 @@ export default function Laporan() {
             onChange={(e) => setTanggal(e.target.value)}
           />
           <button onClick={downloadLaporan}>Export ke Excel</button>
+          <div className="filter-id">
+            <label>Cari ID Transaksi: </label>
+            <input
+              type="text"
+              placeholder="Masukkan ID Transaksi"
+              value={filterId}
+              onChange={(e) => setFilterId(e.target.value)}
+            />
+          </div>
         </div>
 
         <div className="transaksi-list">
-          {transaksi.length > 0 ? (
-            transaksi.map((trx) => (
+          {filteredTransaksi.length > 0 ? (
+            filteredTransaksi.map((trx) => (
               <div
                 key={trx.id}
                 className="transaksi-box"

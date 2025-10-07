@@ -430,7 +430,6 @@ export default function Produk() {
                   required
                 />
                 <p>Tampilkan Produk:</p>
-                {/* Ganti select dengan checkbox */}
                 <label>
                   <input
                     type="checkbox"
