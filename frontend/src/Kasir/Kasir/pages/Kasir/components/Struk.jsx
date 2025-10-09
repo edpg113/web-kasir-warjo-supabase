@@ -3,10 +3,11 @@ import moment from "moment-timezone";
 import "../style/struk.css";
 import Icon from "../../../assets/logo.png";
 import { supabase } from "../../../../../supabase/supabaseClient";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Struk = ({ transaksiDetails }) => {
-  const [displayName, setDisplayName] = React.useState("");
+  const [displayName, setDisplayName] = useState("");
+  const [customer, setCustomer] = useState("");
 
   if (!transaksiDetails) {
     return <p>Tidak ada data transaksi.</p>;
@@ -14,6 +15,7 @@ const Struk = ({ transaksiDetails }) => {
 
   useEffect(() => {
     getProfiles();
+    getCustomer();
   }, []);
 
   async function getProfiles() {
@@ -37,6 +39,21 @@ const Struk = ({ transaksiDetails }) => {
       setDisplayName(data.display_name);
     }
   }
+
+  async function getCustomer() {
+    const { data, error } = await supabase
+      .from("transaksi_sales")
+      .select("customer")
+      .eq("transaksi_id", transaksiDetails.id)
+      .single();
+
+    if (error) {
+      console.error("Error fetching customer:", error);
+    } else {
+      setCustomer(data.customer);
+    }
+  }
+
   return (
     <div className="struk">
       <div className="head">
@@ -47,7 +64,8 @@ const Struk = ({ transaksiDetails }) => {
       <hr />
       <p>Kasir : {displayName}</p>
       <p>No. Transaksi: {transaksiDetails.id}</p>
-      <p>Tanggal: {moment().tz("Asia/Jakarta").format("DD/MM/YYYY HH:mm")}</p>
+      <p>Tanggal : {moment().tz("Asia/Jakarta").format("DD/MM/YYYY HH:mm")}</p>
+      <p>Customer : {customer || "-"}</p>
       <hr />
       <ul>
         {transaksiDetails.items.map((item, index) => (

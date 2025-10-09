@@ -93,3 +93,34 @@
   }
   
 }
+
+@media screen and (min-width: 800px) and (max-width: 1280px) {
+  .sidebar {
+    width: 305px;
+    z-index: 0;
+    .logo {
+      img {
+        max-width: 50px;
+      }
+      span {
+        font-size: 0.9em;
+      }
+    }
+    .list {
+      padding: 0% 3%;
+      ul {
+        a {
+          font-size: 14px;
+        }
+        li {
+          width: 180px;
+          /* padding: 10px; */
+          img {
+            max-width: 12px;
+            /* padding-right: 10px; */
+          }
+        }
+      }
+    }
+  }
+}

@@ -18,6 +18,7 @@ export default function Rigthbar({
   const [showPaymentDetailsModal, setShowPaymentDetailsModal] = useState(false);
   const [transaksiDetails, setTransaksiDetails] = useState(null);
   const [countdown, setCountdown] = useState(10);
+  const [customer, setCustomer] = useState("");
 
   const totalHarga = cartItems.reduce(
     (total, item) => total + item.hargaProduk * item.qty,
@@ -77,6 +78,7 @@ export default function Rigthbar({
             total: totalHarga,
             transaksi_id: kodeTransaksi,
             payment: paymentMethod,
+            customer: customer,
           },
         ])
         .select(); // penting supaya Supabase mengembalikan row yang baru dibuat
@@ -92,6 +94,7 @@ export default function Rigthbar({
         qty: item.qty,
         subtotal: item.hargaProduk * item.qty,
         payment: paymentMethod,
+        customer: customer,
       }));
 
       // 3) Insert semua detail sekaligus
@@ -126,6 +129,7 @@ export default function Rigthbar({
         kembalian: uang - totalHarga,
         metodePembayaran: paymentMethod,
         items: cartItems,
+        customer: customer,
       });
 
       // refresh & UI
@@ -134,6 +138,7 @@ export default function Rigthbar({
       setCountdown(10);
       setShowPaymentDetailsModal(true);
       setUangKonsumen("");
+      setCustomer("");
     } catch (error) {
       console.error("Gagal menyelesaikan transaksi:", error);
       Swal.fire({
@@ -151,12 +156,14 @@ export default function Rigthbar({
     clearCart();
     setShowPaymentDetailsModal(false);
     setUangKonsumen("");
+    setCustomer("");
   };
 
   const handleSelesai = () => {
     clearCart();
     setShowPaymentDetailsModal(false);
     setUangKonsumen("");
+    setCustomer("");
   };
 
   return (
@@ -221,14 +228,21 @@ export default function Rigthbar({
               </li>
             </ul>
 
-            <label>Nominal Uang Konsumen:</label>
+            <label>Customer :</label>
+            <input
+              type="text"
+              value={customer}
+              onChange={(e) => setCustomer(e.target.value)}
+            />
+
+            <label>Nominal Uang Konsumen :</label>
             <input
               type="number"
               value={uangKonsumen}
               onChange={(e) => setUangKonsumen(parseInt(e.target.value))}
             />
 
-            <label>Metode Pembayaran:</label>
+            <label>Metode Pembayaran :</label>
             <select
               value={paymentMethod}
               onChange={(e) => setPaymentMethod(e.target.value)}

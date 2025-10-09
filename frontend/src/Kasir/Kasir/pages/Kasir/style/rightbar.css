@@ -144,7 +144,7 @@
       font-weight: bold;
     }
 
-    input[type="number"],
+    input[type="number"],input[type="text"],
     select {
       width: 100%;
       padding: 8px;
