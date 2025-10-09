@@ -14,9 +14,10 @@ const Struk = ({ transaksiDetails }) => {
   }
 
   useEffect(() => {
+    // setCustomer(""); // reset customer setiap transaksi baru
     getProfiles();
-    getCustomer();
-  }, []);
+    // getCustomer();
+  }, [transaksiDetails.id]);
 
   async function getProfiles() {
     const {
@@ -40,20 +41,21 @@ const Struk = ({ transaksiDetails }) => {
     }
   }
 
-  async function getCustomer() {
-    const { data, error } = await supabase
-      .from("transaksi_sales")
-      .select("customer")
-      .eq("transaksi_id", transaksiDetails.id)
-      .single();
+  // async function getCustomer() {
+  //   const { data, error } = await supabase
+  //     .from("transaksi_sales")
+  //     .select("customer")
+  //     .eq("transaksi_id", transaksiDetails.id)
+  //     .single();
 
-    if (error) {
-      console.error("Error fetching customer:", error);
-    } else {
-      setCustomer(data.customer);
-    }
-  }
+  //   if (error) {
+  //     console.error("Error fetching customer:", error);
+  //   } else {
+  //     setCustomer(data.customer);
+  //   }
+  // }
 
+  // ...existing code...
   return (
     <div className="struk">
       <div className="head">
@@ -62,24 +64,27 @@ const Struk = ({ transaksiDetails }) => {
       <h2>Warjo ID</h2>
       <p>Jl. Pasir Muncang, Cikopo Selatan, Kab. Bogor</p>
       <hr />
-      <p>Kasir : {displayName}</p>
-      <p>No. Transaksi: {transaksiDetails.id}</p>
-      <p>Tanggal : {moment().tz("Asia/Jakarta").format("DD/MM/YYYY HH:mm")}</p>
-      <p>Customer : {customer || "-"}</p>
+      <div className="info">
+        <p>Kasir : {displayName}</p>
+        <p>No. Transaksi: {transaksiDetails.id}</p>
+        <p>Tanggal : {moment().tz("Asia/Jakarta").format("DD/MM/YYYY HH:mm")}</p>
+        <p>Customer : {transaksiDetails.customer || "-"}</p>
+      </div>
       <hr />
       <ul>
         {transaksiDetails.items.map((item, index) => (
           <li key={index}>
-            {item.namaProduk} x {item.qty} - Rp.{" "}
-            {item.hargaProduk.toLocaleString("id-ID")}
-            {/* {item.catatan && <p>Catatan: {item.catatan}</p>} */}
+            <span>{item.namaProduk} x {item.qty}</span>
+            <span>Rp. {item.hargaProduk.toLocaleString("id-ID")}</span>
           </li>
         ))}
       </ul>
       <hr />
-      <p>Total: Rp {transaksiDetails.total.toLocaleString("id-ID")}</p>
-      <p>Bayar: Rp {transaksiDetails.uangDibayarkan.toLocaleString("id-ID")}</p>
-      <p>Kembali: Rp {transaksiDetails.kembalian.toLocaleString("id-ID")}</p>
+      <div className="info">
+        <p>Total: Rp {transaksiDetails.total.toLocaleString("id-ID")}</p>
+        <p>Bayar: Rp {transaksiDetails.uangDibayarkan.toLocaleString("id-ID")}</p>
+        <p>Kembali: Rp {transaksiDetails.kembalian.toLocaleString("id-ID")}</p>
+      </div>
       <hr />
       <div className="footer">
         <p>Terima kasih telah berbelanja!</p>

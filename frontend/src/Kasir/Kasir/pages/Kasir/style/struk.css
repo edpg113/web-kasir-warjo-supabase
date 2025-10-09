@@ -1,51 +1,104 @@
 .struk {
   font-family: monospace;
-  width: 350px;
+  width: 280px; /* kurangi lebar struk */
   margin: 0 auto;
-  padding: 10px;
-  /* border: 1px solid #ccc; */
+  padding: 5px;
+  font-size: 12px; /* ukuran font default */
+}
 
-  .head {
-    margin: 0 auto;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    img {
-      max-width: 20px;
-      margin: 5px 0;
-    }
-  }
-  .footer {
-    text-align: center;
-    margin-top: 10px;
-    p {
-      font-size: 0.9em;
-    }
-  }
+.struk .head {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 5px auto;
+  text-align: center;
+}
+
+.struk .head img {
+  max-width: 40px;
+  margin: 5px 0;
 }
 
 .struk h2 {
   text-align: center;
-  font-size: 1.2em;
-  margin-bottom: 5px;
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.struk > p:first-of-type {
+  text-align: center;
+  margin: 5px 0;
+  font-size: 11px;
 }
 
 .struk hr {
-  border: 0.5px #ccc solid;
+  border: none;
+  border-top: 1px dashed #000;
   margin: 5px 0;
+}
+
+.struk .info {
+  padding: 0 5px;
+}
+
+.struk .info p {
+  margin: 3px 0;
+  font-size: 11px;
+  padding: 0;
 }
 
 .struk ul {
   list-style: none;
-  padding: 0;
+  padding: 0 5px;
+  margin: 5px 0;
 }
 
 .struk li {
-  margin-bottom: 3px;
-  font-size: 0.9em;
+  margin: 3px 0;
+  font-size: 11px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
-.struk p {
-  font-size: 0.9em;
-  margin: 3px 0;
+.struk li span:first-child {
+  flex: 1;
+  padding-right: 10px;
+  text-align: left;
+}
+
+.struk li span:last-child {
+  white-space: nowrap;
+  text-align: right;
+}
+
+.struk .footer {
+  text-align: center;
+  margin-top: 5px;
+}
+
+.struk .footer p {
+  font-size: 11px;
+  margin: 2px 0;
+}
+
+/* Print styles */
+@media print {
+  @page {
+    margin: 0;
+    size: 80mm 297mm; /* ukuran kertas thermal */
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  .struk {
+    width: 70mm; /* lebar struk thermal */
+    margin: 0;
+    padding: 5mm;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
 }
