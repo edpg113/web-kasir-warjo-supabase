@@ -1,6 +1,6 @@
 import {
-  BarChart,
-  Bar,
+  LineChart,
+  Line,
   CartesianGrid,
   XAxis,
   YAxis,
@@ -38,15 +38,19 @@ export default function Monitoring() {
             return acc;
           }, {});
 
-          const formatted = Object.entries(grouped).map(([tanggal, totalPendapatan]) => ({
-            tanggal,
-            totalPendapatan,
-          }));
+          const formatted = Object.entries(grouped).map(
+            ([tanggal, totalPendapatan]) => ({
+              tanggal,
+              totalPendapatan,
+            })
+          );
 
           setData(formatted);
         } else {
           // Mode bulanan → gunakan fungsi RPC di Supabase
-          const { data: result, error } = await supabase.rpc("get_pendapatan_bulanan");
+          const { data: result, error } = await supabase.rpc(
+            "get_pendapatan_bulanan"
+          );
           if (error) {
             console.error("Error fetching bulanan:", error);
             return;
@@ -90,20 +94,40 @@ export default function Monitoring() {
         <option value="bulanan">Per Bulan</option>
       </select>
 
-      <ResponsiveContainer width="100%" height={300} className="cart-responsive">
-        <BarChart data={data} margin={{ top: 20, right: 0, bottom: 0, left: 50 }}>
+      <ResponsiveContainer
+        width="100%"
+        height={300}
+        className="cart-responsive"
+      >
+        <LineChart
+          data={data}
+          margin={{ top: 20, right: 0, bottom: 0, left: 50 }}
+        >
           <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
           <XAxis
             dataKey={mode === "harian" ? "tanggal" : "bulan"}
-            tickFormatter={mode === "harian" ? formatTanggalIndo : formatBulanIndo}
+            tickFormatter={
+              mode === "harian" ? formatTanggalIndo : formatBulanIndo
+            }
+            tick={{ fontSize: 12 }}
           />
-          <YAxis tickFormatter={(value) => `Rp ${value.toLocaleString("id-ID")}`} />
+          <YAxis
+            tickFormatter={(value) => `Rp ${value.toLocaleString("id-ID")}`}
+            tick={{ fontSize: 13 }}
+          />
           <Tooltip
             formatter={(value) => `Rp ${value.toLocaleString("id-ID")}`}
-            labelFormatter={mode === "harian" ? formatTanggalIndo : formatBulanIndo}
+            labelFormatter={
+              mode === "harian" ? formatTanggalIndo : formatBulanIndo
+            }
           />
-          <Bar dataKey={mode === "harian" ? "totalPendapatan" : "totalpendapatan"} fill="#28a745" />
-        </BarChart>
+          <Line
+            type="natural"
+            dataKey={mode === "harian" ? "totalPendapatan" : "totalpendapatan"}
+            stroke="#28a745"
+            strokeWidth={2}
+          />
+        </LineChart>
       </ResponsiveContainer>
     </div>
   );

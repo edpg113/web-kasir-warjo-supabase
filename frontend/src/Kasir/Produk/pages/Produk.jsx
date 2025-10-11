@@ -313,7 +313,7 @@ export default function Produk() {
             </div>
           </form>
 
-          <div className="card">
+          <div className="box-produk">
             <h4>Total Produk Terdisplay: {totalProdukTerdisplay}</h4>
             <h4>Total Produk Habis: {totalProdukHabis}</h4>
           </div>
@@ -337,10 +337,10 @@ export default function Produk() {
               </li>
             </ul>
           </div>
-          <div className="flex">
+          <div className="flex2">
             {loading ? (
               Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="container">
+                <div key={i} className="container2">
                   <Skeleton height={150} />
                   <Skeleton height={100} />
                   <Skeleton height={80} />
@@ -348,13 +348,13 @@ export default function Produk() {
               ))
             ) : filteredMenu.length > 0 ? (
               filteredMenu.map((item) => (
-                <div className="container" key={item.id}>
-                  <div className="icon">
+                <div className="container2" key={item.id}>
+                  <div className="icon2">
                     <img src={item.gambar} alt={item.gambar} />
                   </div>
                   <strong>{item.namaProduk}</strong>
-                  <div className="menuItem">
-                    <div className="menuInfo">
+                  <div className="menuItem2">
+                    <div className="menuInfo2">
                       <p>
                         Harga Beli : Rp.{" "}
                         {item.hargaBeli.toLocaleString("id-ID")} <br />

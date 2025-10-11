@@ -111,9 +111,9 @@ export default function Dashboard() {
     }
   }
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
 
   if (!session) {
     return null;
