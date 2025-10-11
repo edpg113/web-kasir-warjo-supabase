@@ -397,8 +397,8 @@ export default function Produk() {
           </div>
         </div>
         {showEditModal && (
-          <div className="modal-overlay">
-            <div className="modal-content">
+          <div className="modal-overlay2">
+            <div className="modal-content2">
               <h3>Edit Produk</h3>
               <form onSubmit={handleUpdateEdit}>
                 <p>Nama Produk:</p>
