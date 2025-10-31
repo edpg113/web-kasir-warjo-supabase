@@ -115,3 +115,21 @@
     page-break-before: avoid;
   }
 }
+
+/* Tambahkan di bagian bawah file */
+@media print {
+  @page {
+    size: 80mm auto;
+    margin: 0;
+  }
+  
+  body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .struk-container {
+    display: block !important;
+  }
+}
