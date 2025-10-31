@@ -152,140 +152,55 @@ export default function Rigthbar({
   const strukRef = useRef(null);
 
 const handleCetakStruk = () => {
-
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
   try {
-    if (isMobile) {
-      const printStyles = document.createElement('style');
-      printStyles.textContent = `
-        @page { 
-          size: 80mm auto; 
-          margin: 0; 
-        }
-        @media print {
-          body * {
-            visibility: hidden;
-          }
-          .struk-container, 
-          .struk-container * {
-            visibility: visible;
-          }
-          .struk-container {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-          }
-          .struk {
-            width: 70mm !important;
-            padding: 5mm;
-          }
-        }
-      `;
-      document.head.appendChild(printStyles);
+    const printContent = strukRef.current.innerHTML;
+    const iframe = document.createElement("iframe");
+    iframe.style.position = "fixed";
+    iframe.style.right = "0";
+    iframe.style.bottom = "0";
+    iframe.style.width = "0";
+    iframe.style.height = "0";
+    iframe.style.border = "none";
 
-      if (strukRef.current) {
-        strukRef.current.style.display = 'block';
-      }
+    document.body.appendChild(iframe);
 
-      window.print();
+    const printStyles = `@page { size: 80mm auto; margin: 0; } body { margin: 0; padding: 0; } .struk { width: 70mm; margin: 0 auto; padding: 5mm; font-family: monospace; } .struk .head { text-align: center; } .struk img { max-width: 40px; } .struk hr { border: none; border-top: 1px dashed #000; } .struk ul { list-style: none; padding: 0; } .struk li { display: flex; justify-content: space-between; } .footer { text-align: center;}` ;
 
+    const doc = iframe.contentWindow.document;
+    doc.open();
+    doc.write(`
+      <html>
+        <head>
+          <title>Struk Warjo</title>
+          <style>
+            ${printStyles}
+          </style>
+        </head>
+        <body>${printContent}</body>
+      </html>
+    `);
+    doc.close();
+
+    iframe.onload = () => {
+      iframe.contentWindow.focus();
+      iframe.contentWindow.print();
       setTimeout(() => {
-        document.head.removeChild(printStyles);
-        if (strukRef.current) {
-          strukRef.current.style.display = 'none';
-        }
+        document.body.removeChild(iframe);
         clearCart();
         setShowPaymentDetailsModal(false);
         setUangKonsumen("");
         setCustomer("");
-      }, 500);
-    } else {
-      const printWindow = window.open('', '_blank');
-      if (!printWindow) {
-        throw new Error('Popup blocked!')
-      }
-      // const printWindow = window.open('', '_blank');
-      const strukContent = strukRef.current.innerHTML;
-      
-      const printStyles = `
-        @page { 
-          size: 80mm auto; 
-          margin: 0; 
-        }
-        body { 
-          margin: 0;
-          padding: 0;
-        }
-        .struk {
-          width: 70mm;
-          margin: 0 auto;
-          padding: 5mm;
-          font-family: monospace;
-        }
-          .struk .head {
-          text-align: center;
-        }
-        .struk img {
-          max-width: 40px;
-        }
-        
-        .struk hr {
-          border: none;
-          border-top: 1px dashed #000;
-        }
-        .struk ul {
-          list-style: none;
-          padding: 0;
-        }
-        .struk li {
-          display: flex;
-          justify-content: space-between;
-        }
-          .footer {
-          text-align: center;}
-      `;
-    
-      printWindow.document.write(`
-        <!DOCTYPE html>
-        <html>
-          <head>
-            <title>Struk Warjo</title>
-            <style>${printStyles}</style>
-          </head>
-          <body>
-            ${strukContent}
-          </body>
-        </html>
-      `);
-      
-      printWindow.document.close();
-      
-      printWindow.onload = function() {
-        setTimeout(() => {
-          printWindow.print();
-          printWindow.close();
-          
-          clearCart();
-          setShowPaymentDetailsModal(false);
-          setUangKonsumen("");
-          setCustomer("");
-        }, 3000);
-      };
+      }, 1500);
     };
-    } catch (error) {
-      console.error("Gagal mencetak struk:", error);
-      Swal.fire({
-        icon: "error",
-        title: "Gagal",
-        text: "Terjadi kesalahan saat mencetak struk. Cek console untuk detail.",
-      });
-      clearCart();
-      setShowPaymentDetailsModal(false);
-      setUangKonsumen("");
-      setCustomer("");
-    }
+  } catch (error) {
+    console.error("Gagal mencetak struk:", error);
+    Swal.fire({
+      icon: "error",
+      title: "Gagal",
+      text: "Terjadi kesalahan saat mencetak struk. Cek console untuk detail.",
+    });
+  }
+
   }
 
 
