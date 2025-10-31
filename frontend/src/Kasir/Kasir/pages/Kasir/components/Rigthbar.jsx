@@ -271,7 +271,7 @@ const handleCetakStruk = () => {
           setShowPaymentDetailsModal(false);
           setUangKonsumen("");
           setCustomer("");
-        }, 500);
+        }, 3000);
       };
     };
     } catch (error) {
