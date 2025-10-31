@@ -129,7 +129,7 @@ form button:hover {
 }
 
 .flex2 .container2 {
-  width: 190px;
+  width: 195px;
   padding: 10px;
   margin: 1% 10px;
   transition: all 0.3s ease;
@@ -158,7 +158,7 @@ form button:hover {
 }
 
 .flex2 .container2 .icon2 img {
-  width: auto;
+  width: 100%;
   height: 200px;
   object-fit: cover;
   border-radius: 5px;
@@ -278,7 +278,7 @@ form button:hover {
 
   .flex2 .container2 {
     width: 100%;
-    margin: 0px 0;
+    margin: 0px 0px;
   }
 
   .flex2 .container2 button {
@@ -341,7 +341,7 @@ form button:hover {
   }
 
   .icon2 img {
-    width: 100%;
+    width: 10%;
     height: 180px;
   }
 }

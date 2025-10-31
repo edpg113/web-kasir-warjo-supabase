@@ -41,28 +41,13 @@ const Struk = ({ transaksiDetails }) => {
     }
   }
 
-  // async function getCustomer() {
-  //   const { data, error } = await supabase
-  //     .from("transaksi_sales")
-  //     .select("customer")
-  //     .eq("transaksi_id", transaksiDetails.id)
-  //     .single();
-
-  //   if (error) {
-  //     console.error("Error fetching customer:", error);
-  //   } else {
-  //     setCustomer(data.customer);
-  //   }
-  // }
-
-  // ...existing code...
   return (
-    <div className="struk">
+    <div className="struk" style={{ maxWidth: '70mm', margin: '0 auto'}}>
       <div className="head">
         <img src={Icon} alt="" />
-      </div>
       <h2>Warjo ID</h2>
       <p>Jl. Pasir Muncang, Cikopo Selatan, Kab. Bogor</p>
+      </div>
       <hr />
       <div className="info">
         <p>Kasir : {displayName}</p>
@@ -81,9 +66,9 @@ const Struk = ({ transaksiDetails }) => {
       </ul>
       <hr />
       <div className="info">
-        <p>Total: Rp {transaksiDetails.total.toLocaleString("id-ID")}</p>
-        <p>Bayar: Rp {transaksiDetails.uangDibayarkan.toLocaleString("id-ID")}</p>
-        <p>Kembali: Rp {transaksiDetails.kembalian.toLocaleString("id-ID")}</p>
+        <p>Total : Rp. {transaksiDetails.total.toLocaleString("id-ID")}</p>
+        <p>Bayar : Rp. {transaksiDetails.uangDibayarkan.toLocaleString("id-ID")}</p>
+        <p>Kembali : Rp. {transaksiDetails.kembalian.toLocaleString("id-ID")}</p>
       </div>
       <hr />
       <div className="footer">

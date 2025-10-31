@@ -151,13 +151,75 @@ export default function Rigthbar({
 
   const strukRef = useRef(null);
 
-  const handleCetakStruk = () => {
-    window.print();
-    clearCart();
-    setShowPaymentDetailsModal(false);
-    setUangKonsumen("");
-    setCustomer("");
+const handleCetakStruk = () => {
+  const printWindow = window.open('', '_blank');
+  const strukContent = strukRef.current.innerHTML;
+  
+  const printStyles = `
+    @page { 
+      size: 80mm auto; 
+      margin: 0; 
+    }
+    body { 
+      margin: 0;
+      padding: 0;
+    }
+    .struk {
+      width: 70mm;
+      margin: 0 auto;
+      padding: 5mm;
+      font-family: monospace;
+    }
+      .struk .head {
+      text-align: center;
+    }
+    .struk img {
+      max-width: 40px;
+    }
+    
+    .struk hr {
+      border: none;
+      border-top: 1px dashed #000;
+    }
+    .struk ul {
+      list-style: none;
+      padding: 0;
+    }
+    .struk li {
+      display: flex;
+      justify-content: space-between;
+    }
+      .footer {
+      text-align: center;}
+  `;
+
+  printWindow.document.write(`
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>Struk Warjo</title>
+        <style>${printStyles}</style>
+      </head>
+      <body>
+        ${strukContent}
+      </body>
+    </html>
+  `);
+  
+  printWindow.document.close();
+  
+  printWindow.onload = function() {
+    setTimeout(() => {
+      printWindow.print();
+      printWindow.close();
+      
+      clearCart();
+      setShowPaymentDetailsModal(false);
+      setUangKonsumen("");
+      setCustomer("");
+    }, 500);
   };
+};
 
   const handleSelesai = () => {
     clearCart();

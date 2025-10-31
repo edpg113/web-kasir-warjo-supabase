@@ -1,5 +1,6 @@
 import {
   LineChart,
+  PieChart,
   Line,
   CartesianGrid,
   XAxis,
@@ -14,6 +15,7 @@ import { supabase } from "../../../supabase/supabaseClient";
 export default function Monitoring() {
   const [data, setData] = useState([]);
   const [mode, setMode] = useState("harian");
+  const [menu, setMenu] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -84,6 +86,21 @@ export default function Monitoring() {
       year: "numeric",
     }).format(tanggal);
   };
+
+async function fetchMenu() {
+    try {
+      const { data, error } = await supabase.from("produk").select("*");
+      setMenu(data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching menu data:", error);
+      alert("Gagal mengambil data menu. Silakan coba lagi.");
+    }
+  }
+
+  const totalProdukTersedia = menu.filter((item) => {
+    item.qty > 0 && item.tampil === true;
+  }).length;
 
   return (
     <div className="chart-container">

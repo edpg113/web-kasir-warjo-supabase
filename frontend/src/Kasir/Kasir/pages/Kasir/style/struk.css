@@ -83,22 +83,35 @@
 }
 
 /* Print styles */
+/* Hapus atau komentar @media print yang lama */
 @media print {
   @page {
+    size: 80mm auto;
     margin: 0;
-    size: 80mm 297mm; /* ukuran kertas thermal */
   }
-
-  body {
-    margin: 0;
-    padding: 0;
+  
+  body * {
+    visibility: hidden;
   }
-
+  
+  .struk,
+  .struk * {
+    visibility: visible;
+  }
+  
   .struk {
-    width: 70mm; /* lebar struk thermal */
-    margin: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 70mm !important;
+    margin: 0 auto;
     padding: 5mm;
-    print-color-adjust: exact;
-    -webkit-print-color-adjust: exact;
+  }
+  
+  /* Mencegah page break di tengah struk */
+  .struk {
+    page-break-inside: avoid;
+    page-break-after: avoid;
+    page-break-before: avoid;
   }
 }
