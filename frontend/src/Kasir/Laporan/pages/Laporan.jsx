@@ -266,7 +266,7 @@ export default function Laporan() {
                   Total : Rp. {selectedTransaksi.total.toLocaleString("id-ID")}
                 </h4>
                 <h4>
-                  Bayar : Rp. {selectedTransaksi.uangCustomer.toLocaleString("id-ID")}
+                  Bayar : Rp. {Number(selectedTransaksi.uangCustomer || 0).toLocaleString("id-ID")}
                 </h4>
               </div>
             </div>

@@ -96,6 +96,7 @@ export default function Rigthbar({
         subtotal: item.hargaProduk * item.qty,
         payment: paymentMethod,
         customer: customer,
+        uangCustomer: uangKonsumen,
       }));
 
       // 3) Insert semua detail sekaligus
@@ -152,24 +153,24 @@ export default function Rigthbar({
 
   const strukRef = useRef(null);
 
-const handleCetakStruk = () => {
-  try {
-    const printContent = strukRef.current.innerHTML;
-    const iframe = document.createElement("iframe");
-    iframe.style.position = "fixed";
-    iframe.style.right = "0";
-    iframe.style.bottom = "0";
-    iframe.style.width = "0";
-    iframe.style.height = "0";
-    iframe.style.border = "none";
+  const handleCetakStruk = () => {
+    try {
+      const printContent = strukRef.current.innerHTML;
+      const iframe = document.createElement("iframe");
+      iframe.style.position = "fixed";
+      iframe.style.right = "0";
+      iframe.style.bottom = "0";
+      iframe.style.width = "0";
+      iframe.style.height = "0";
+      iframe.style.border = "none";
 
-    document.body.appendChild(iframe);
+      document.body.appendChild(iframe);
 
-    const printStyles = `@page { size: 80mm auto; margin: 0; } body { margin: 0; padding: 0; } .struk { width: 70mm; margin: 0 auto; padding: 5mm; font-family: monospace; } .struk .head { text-align: center; } .struk img { max-width: 40px; } .struk hr { border: none; border-top: 1px dashed #000; } .struk ul { list-style: none; padding: 0; } .struk li { display: flex; justify-content: space-between; } .footer { text-align: center;}` ;
+      const printStyles = `@page { size: 80mm auto; margin: 0; } body { margin: 0; padding: 0; } .struk { width: 70mm; margin: 0 auto; padding: 5mm; font-family: monospace; } .struk .head { text-align: center; } .struk img { max-width: 40px; } .struk hr { border: none; border-top: 1px dashed #000; } .struk ul { list-style: none; padding: 0; } .struk li { display: flex; justify-content: space-between; } .footer { text-align: center;}`;
 
-    const doc = iframe.contentWindow.document;
-    doc.open();
-    doc.write(`
+      const doc = iframe.contentWindow.document;
+      doc.open();
+      doc.write(`
       <html>
         <head>
           <title>Struk Warjo</title>
@@ -180,30 +181,28 @@ const handleCetakStruk = () => {
         <body>${printContent}</body>
       </html>
     `);
-    doc.close();
+      doc.close();
 
-    iframe.onload = () => {
-      iframe.contentWindow.focus();
-      iframe.contentWindow.print();
-      setTimeout(() => {
-        document.body.removeChild(iframe);
-        clearCart();
-        setShowPaymentDetailsModal(false);
-        setUangKonsumen("");
-        setCustomer("");
-      }, 1500);
-    };
-  } catch (error) {
-    console.error("Gagal mencetak struk:", error);
-    Swal.fire({
-      icon: "error",
-      title: "Gagal",
-      text: "Terjadi kesalahan saat mencetak struk. Cek console untuk detail.",
-    });
-  }
-
-  }
-
+      iframe.onload = () => {
+        iframe.contentWindow.focus();
+        iframe.contentWindow.print();
+        setTimeout(() => {
+          document.body.removeChild(iframe);
+          clearCart();
+          setShowPaymentDetailsModal(false);
+          setUangKonsumen("");
+          setCustomer("");
+        }, 1500);
+      };
+    } catch (error) {
+      console.error("Gagal mencetak struk:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Gagal",
+        text: "Terjadi kesalahan saat mencetak struk. Cek console untuk detail.",
+      });
+    }
+  };
 
   const handleSelesai = () => {
     clearCart();
