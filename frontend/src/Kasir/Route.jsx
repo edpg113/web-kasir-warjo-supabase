@@ -5,6 +5,7 @@ import Produk from './Produk/pages/Produk';
 import Laporan from './Laporan/pages/Laporan';
 import Register from './Login/pages/Register';
 import Login from './Login/pages/Login';
+import Keuangan from './Keuangan/pages/keuangan';
 
 
 export default function Index() {
@@ -17,6 +18,7 @@ export default function Index() {
         <Route path='/kasir' element={<Kasir />} />
         <Route path='/produk' element={<Produk />} />
         <Route path='/laporan' element={<Laporan />} />
+        <Route path='/keuangan' element={<Keuangan />} />
       </Routes>
     </BrowserRouter>
   )

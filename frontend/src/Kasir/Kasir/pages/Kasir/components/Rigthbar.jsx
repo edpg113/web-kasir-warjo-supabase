@@ -79,6 +79,7 @@ export default function Rigthbar({
             transaksi_id: kodeTransaksi,
             payment: paymentMethod,
             customer: customer,
+            uangCustomer: uangKonsumen,
           },
         ])
         .select(); // penting supaya Supabase mengembalikan row yang baru dibuat

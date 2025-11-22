@@ -1,0 +1,65 @@
+.keuangan-container {
+    padding: 50px;
+    margin-left: 350px;
+
+    h1 {
+        margin-bottom: 50px;
+    }
+    .container-form-manage-uang {
+        position: relative;
+        .group-input {
+            display: flex;
+            flex-direction: column;
+            margin-top: 50px;
+
+            input {
+                border: 1px solid #ccc;
+                border-radius: 10px;
+                font-size: 14px;
+            }
+        }
+    }
+    .tabel-keuangan {
+        margin-top: 50px;
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        .filter {
+            margin-bottom: 20px;
+            input {
+                width: 200px;
+                height: 30px;
+                padding: 5px;
+                border-radius: 5px;
+                outline: none;
+                border: 1px solid #ccc;
+            }
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+
+            th {
+                color: white;
+
+            }
+            // th:nth-child(1){
+            //     width: 5%;
+            // }
+
+            th, td {
+                border: 1px solid #ccc;
+                padding: 10px;
+                text-align: left;
+            }
+
+            th {
+                      background: rgb(0, 170, 19);
+
+            }
+        }
+    }
+}

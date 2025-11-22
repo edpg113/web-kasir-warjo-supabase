@@ -47,6 +47,12 @@ export default function Sidebar() {
                 Laporan
               </li>
             </Link>
+            <Link to="/keuangan">
+              <li>
+                <img src={Ilaporan} alt="" />
+                Keuangan
+              </li>
+            </Link>
             <Link to="/" onClick={signOut}>
               <li>
                 <img src={Ikeluar} alt="" />

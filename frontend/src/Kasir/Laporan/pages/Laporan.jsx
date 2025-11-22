@@ -107,8 +107,16 @@ export default function Laporan() {
         return;
       }
 
+      // konversi waktu ke WIB
+      const waktuLokal = data.map((item) => ({
+        ...item,
+        tanggal: moment(item.tanggal)
+          .tz("Asia/Jakarta")
+          .format("DD-MM-YYYY HH:mm"),
+      }));
+
       // ubah data ke worksheet
-      const worksheet = XLSX.utils.json_to_sheet(data);
+      const worksheet = XLSX.utils.json_to_sheet(waktuLokal);
 
       // buat workbook
       const workbook = XLSX.utils.book_new();
@@ -228,6 +236,7 @@ export default function Laporan() {
                   : "Tidak ada waktu transaksi"}
               </p>
               <p>Payment : {selectedTransaksi.payment}</p>
+              <p>Customer : {selectedTransaksi.customer}</p>
               {detail.length > 0 ? (
                 <table border="1">
                   <thead>
@@ -255,6 +264,9 @@ export default function Laporan() {
               <div className="modal-footer">
                 <h4>
                   Total : Rp. {selectedTransaksi.total.toLocaleString("id-ID")}
+                </h4>
+                <h4>
+                  Bayar : Rp. {selectedTransaksi.uangCustomer.toLocaleString("id-ID")}
                 </h4>
               </div>
             </div>

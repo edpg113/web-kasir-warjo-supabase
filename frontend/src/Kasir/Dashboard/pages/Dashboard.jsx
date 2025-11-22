@@ -6,6 +6,8 @@ import Monitoring from "../components/Monitoring";
 import "../style/monitoring.css";
 import Stock from "../../Kasir/assets/stock.png";
 import Money from "../../Kasir/assets/money.png";
+import DownTrend from "../../Kasir/assets/downtrend.png";
+import UpTrend from "../../Kasir/assets/uptrend.png";
 
 export default function Dashboard() {
   const [session, setSession] = useState(null);
@@ -14,14 +16,15 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const [stats, setStats] = useState({
     totalPenjualanHariIni: 0,
-    totalProdukTersedia: 0,
-    produkTerjual: 0,
     totalSeluruhPenjualan: 0,
+    totalPengeluaran: 0,
   });
 
   useEffect(() => {
     // Subscribe to auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
       if (!session) {
         navigate("/");
@@ -44,7 +47,9 @@ export default function Dashboard() {
 
   async function checkUser() {
     try {
-      const { data: { session } } = await supabase.auth.getSession();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
       setSession(session);
       if (!session) {
         navigate("/");
@@ -57,6 +62,7 @@ export default function Dashboard() {
   }
 
   const fetchStats = async () => {
+    // ambil data penjualan hari ini
     try {
       const waktu = new Date().toISOString().slice(0, 10);
       const { data: penjualanHariIni, error: errorPenjualanHariIni } =
@@ -73,6 +79,8 @@ export default function Dashboard() {
       const totalPenjualanHariIni =
         penjualanHariIni?.reduce((sum, record) => sum + record.total, 0) || 0;
 
+      // ambil data seluruh penjualan
+
       const { data: seluruhPenjualan, error: errorSeluruhPenjualan } =
         await supabase.from("transaksi_sales").select("total");
 
@@ -83,10 +91,22 @@ export default function Dashboard() {
       const totalSeluruhPenjualan =
         seluruhPenjualan?.reduce((sum, record) => sum + record.total, 0) || 0;
 
+      // ambil total pengeluaran
+      const { data: pengeluaran } = await supabase
+        .from("transaksi_pengeluaran")
+        .select("jumlah");
+
+      const totalPengeluaran =
+        pengeluaran?.reduce((sum, record) => sum + record.jumlah, 0) || 0;
+
+      // hitung total saldo akhir
+      const totalSaldoAkhir = totalSeluruhPenjualan - totalPengeluaran;
+
       setStats({
-        ...stats,
+        // ...stats,
         totalPenjualanHariIni,
-        totalSeluruhPenjualan,
+        totalPengeluaran,
+        totalSeluruhPenjualan: totalSaldoAkhir,
       });
     } catch (error) {
       console.error("Error fetching stats:", error);
@@ -95,7 +115,9 @@ export default function Dashboard() {
 
   async function getProfiles() {
     try {
-      const { data: { user } } = await supabase.auth.getUser();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
       if (!user) throw new Error("No user");
 
       const { data, error } = await supabase
@@ -103,17 +125,13 @@ export default function Dashboard() {
         .select("display_name")
         .eq("id", user.id)
         .single();
-      
+
       if (error) throw error;
       setDisplayName(data.display_name);
     } catch (error) {
       console.error("Error fetching profile:", error);
     }
   }
-
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
 
   if (!session) {
     return null;
@@ -128,15 +146,22 @@ export default function Dashboard() {
           <div className="card">
             <h4>Total Penjualan Hari Ini</h4>
             <p>Rp. {stats.totalPenjualanHariIni.toLocaleString("id-ID")}</p>
-            <img src={Stock} alt="" />
+            <img src={UpTrend} alt="" />
             <span className="stockup">Cash Inflow</span>
+          </div>
+
+          <div className="card">
+            <h4>Total Pengeluaran</h4>
+            <p>Rp. {stats.totalPengeluaran.toLocaleString("id-ID")}</p>
+            <img src={DownTrend} alt="" />
+            <span className="stockdown">Cash Outflow </span>
           </div>
 
           <div className="card">
             <h4>Total Uang Toko</h4>
             <p>Rp. {stats.totalSeluruhPenjualan.toLocaleString("id-ID")}</p>
             <img src={Money} alt="" />
-            <span className="stockdown">Profit</span>
+            <span className="stockup">Cash Balance</span>
           </div>
         </div>
         <Monitoring />
