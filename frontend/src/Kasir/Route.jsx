@@ -5,7 +5,7 @@ import Produk from './Produk/pages/Produk';
 import Laporan from './Laporan/pages/Laporan';
 import Register from './Login/pages/Register';
 import Login from './Login/pages/Login';
-import Keuangan from './Keuangan/pages/keuangan';
+import Keuangan from './Keuangan/pages/Keuangan';
 
 
 export default function Index() {

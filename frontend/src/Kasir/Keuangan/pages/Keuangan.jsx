@@ -3,7 +3,6 @@ import Sidebar from "../../components/Sidebar";
 import "../style/keuangan.scss";
 import { useState, useEffect } from "react";
 import { supabase } from "../../../supabase/supabaseClient";
-import Stock from "../../Kasir/assets/stock.png";
 import moment from "moment-timezone";
 import Money from "../../Kasir/assets/money.png";
 import Swal from "sweetalert2";
