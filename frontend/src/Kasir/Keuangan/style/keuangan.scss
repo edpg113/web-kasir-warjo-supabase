@@ -44,6 +44,8 @@
 
             th {
                 color: white;
+                      background: rgb(0, 170, 19);
+
 
             }
             // th:nth-child(1){
@@ -56,9 +58,8 @@
                 text-align: left;
             }
 
-            th {
-                      background: rgb(0, 170, 19);
-
+            tr:nth-child(even) {
+                background-color: #f3f0f0;
             }
         }
     }

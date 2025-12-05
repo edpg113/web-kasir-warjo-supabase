@@ -5,10 +5,25 @@ import Produk from './Produk/pages/Produk';
 import Laporan from './Laporan/pages/Laporan';
 import Register from './Login/pages/Register';
 import Login from './Login/pages/Login';
-import Keuangan from './Keuangan/pages/Keuangan';
+import Keuangan from './Keuangan/pages/keuangan';
+import { useEffect, useState } from 'react';
+import { supabase } from '../supabase/supabaseClient';
 
 
 export default function Index() {
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    // Cek session saat aplikasi dimuat
+    supabase.auth.getSession().then(() => {
+      setIsReady(true);
+    })
+  }, []);
+
+  if (!isReady) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <BrowserRouter>
       <Routes>
