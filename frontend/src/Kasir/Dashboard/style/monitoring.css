@@ -46,6 +46,11 @@ h4 {
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   position: relative;
+  border-left: 5px solid #4caf50;
+
+  &:nth-child(2) {
+    border-left: 5px solid #be141d;
+  }
 }
 
 .info-cards .card h4 {

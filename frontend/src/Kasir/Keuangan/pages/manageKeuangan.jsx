@@ -20,12 +20,9 @@ export default function Keuangan() {
 
   useEffect(() => {
     fetchStats();
-    // fetchDataPengeluaran();
   }, []);
 
-  useEffect(() => {
-    fetchDataPengeluaran();
-  }, [tanggal])
+
 
   const fetchStats = async () => {
     // ambil data penjualan hari ini
@@ -133,6 +130,11 @@ export default function Keuangan() {
       console.error("Error fetching expenditure data:", error);
     }
   };
+
+    useEffect(() => {
+    fetchDataPengeluaran();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tanggal])
 
   return (
     <div>

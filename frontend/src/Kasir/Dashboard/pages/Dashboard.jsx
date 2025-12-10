@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../../supabase/supabaseClient";
 import Sidebar from "../../components/Sidebar";
 import Monitoring from "../components/Monitoring";
 import "../style/monitoring.css";
-import Stock from "../../Kasir/assets/stock.png";
+// import Stock from "../../Kasir/assets/stock.png";
 import Money from "../../Kasir/assets/money.png";
 import DownTrend from "../../Kasir/assets/downtrend.png";
 import UpTrend from "../../Kasir/assets/uptrend.png";
 
 export default function Dashboard() {
   const [session, setSession] = useState(null);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const [displayName, setDisplayName] = useState("");
   const navigate = useNavigate();
   const [stats, setStats] = useState({
@@ -19,6 +19,22 @@ export default function Dashboard() {
     totalSeluruhPenjualan: 0,
     totalPengeluaran: 0,
   });
+
+  const checkUser = useCallback(async () => {
+    try {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      setSession(session);
+      if (!session) {
+        navigate("/");
+      }
+      // setLoading(false);
+    } catch (error) {
+      console.error("Error checking auth:", error);
+      navigate("/");
+    }
+  }, [navigate]);
 
   useEffect(() => {
     // Subscribe to auth changes
@@ -36,7 +52,7 @@ export default function Dashboard() {
 
     // Cleanup subscription
     return () => subscription?.unsubscribe();
-  }, [navigate]);
+  }, [navigate, checkUser]);
 
   useEffect(() => {
     if (session) {
@@ -44,22 +60,6 @@ export default function Dashboard() {
       getProfiles();
     }
   }, [session]);
-
-  async function checkUser() {
-    try {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-      setSession(session);
-      if (!session) {
-        navigate("/");
-      }
-      setLoading(false);
-    } catch (error) {
-      console.error("Error checking auth:", error);
-      navigate("/");
-    }
-  }
 
   const fetchStats = async () => {
     // ambil data penjualan hari ini
